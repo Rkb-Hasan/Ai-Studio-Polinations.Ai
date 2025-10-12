@@ -1,5 +1,5 @@
 import LWSLogo from "../assets/logo.svg";
-export default function Header() {
+export default function Header({ onRoute, route }) {
   return (
     <header className="flex items-center mb-12 justify-between">
       <div className="flex items-center">
@@ -7,14 +7,20 @@ export default function Header() {
       </div>
       <ul className="ml-4 text-sm text-zinc-400 flex gap-8">
         <a
-          href="./index.html"
-          className="hover:text-zinc-200 font-medium text-zinc-200 cursor-pointer transition-all"
+          onClick={() => onRoute("create")}
+          href="#"
+          className={`hover:text-zinc-200  font-medium cursor-pointer transition-all ${
+            route === "create" && "text-zinc-200"
+          }`}
         >
           Create Image
         </a>
         <a
-          href="./downloaded.html"
-          className="hover:text-zinc-200 cursor-pointer transition-all"
+          onClick={() => onRoute("downloaded")}
+          href="#"
+          className={`hover:text-zinc-200 font-medium cursor-pointer transition-all ${
+            route === "downloaded" && "text-zinc-200"
+          }`}
         >
           Downloaded
         </a>
