@@ -13,6 +13,7 @@ export default function InputBox() {
           placeholder="Create with Prompts"
           className="outline-none w-full py-4 px-2 bg-transparent text-white placeholder-zinc-400 text-lg"
         />
+
         <button className="bg-zinc-800 hover:bg-zinc-700 transition-colors p-4 mr-1 rounded-full">
           <SubmitIcon></SubmitIcon>
         </button>

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import useModels from "../../hooks/useModels";
+import ModelOption from "./ModelOption";
 
 const labelClass = "block text-sm font-medium text-zinc-700 mb-1";
 const inputClass =
@@ -11,8 +13,11 @@ export default function AdditionalSettings() {
     width: 1024,
     height: 1024,
   });
-
-  return (
+  const { loading, error, models } = useModels();
+  console.log(error);
+  return loading.state ? (
+    <p>{loading.message}</p>
+  ) : (
     <div className="border border-zinc-700/70 mb-6 rounded-lg p-4">
       <div className="flex items-center justify-between mb-4">
         <h4 className="font-medium">Advanced Settings</h4>
@@ -27,12 +32,13 @@ export default function AdditionalSettings() {
             id="model"
             className="w-full px-3 py-2 bg-zinc-900/10 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
           >
-            <option className="bg-zinc-900" value="flux" selected>
-              Flux
-            </option>
-            <option className="bg-zinc-900" value="turbo">
-              Turbo
-            </option>
+            {models.length > 0 ? (
+              models.map((item) => (
+                <ModelOption key={item} value={item}></ModelOption>
+              ))
+            ) : (
+              <ModelOption value="No Models Found"></ModelOption>
+            )}
           </select>
         </div>
 
