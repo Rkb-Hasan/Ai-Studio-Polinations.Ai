@@ -7,12 +7,7 @@ const inputClass =
 const btnClass =
   "bg-zinc-900/10  px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors";
 
-export default function AdditionalSettings({
-  widthHeight,
-  onWidthHeight,
-  settings,
-  onSettings,
-}) {
+export default function AdditionalSettings({ onSettings, settings }) {
   const { loading, models } = useModels();
 
   return loading.state ? (
@@ -37,7 +32,7 @@ export default function AdditionalSettings({
                 <ModelOption key={item} value={item}></ModelOption>
               ))
             ) : (
-              <ModelOption value="No Models Found"></ModelOption>
+              <ModelOption value="No Models Found">No Models Found</ModelOption>
             )}
           </select>
         </div>
@@ -60,10 +55,8 @@ export default function AdditionalSettings({
           </label>
           <input
             type="number"
-            onChange={(e) =>
-              onWidthHeight({ ...widthHeight, width: e.target.value })
-            }
-            value={widthHeight.width}
+            onChange={(e) => onSettings({ ...settings, width: e.target.value })}
+            value={settings.width}
             className={inputClass}
           />
         </div>
@@ -75,9 +68,9 @@ export default function AdditionalSettings({
           <input
             type="number"
             onChange={(e) =>
-              onWidthHeight({ ...widthHeight, height: e.target.value })
+              onSettings({ ...settings, height: e.target.value })
             }
-            value={widthHeight.height}
+            value={settings.height}
             className={inputClass}
           />
         </div>
@@ -86,25 +79,33 @@ export default function AdditionalSettings({
           <label className={labelClass}>Aspect Ratio Presets</label>
           <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => onWidthHeight({ width: 1920, height: 1920 })}
+              onClick={() =>
+                onSettings({ ...settings, width: 1920, height: 1920 })
+              }
               className={btnClass}
             >
               1:1
             </button>
             <button
-              onClick={() => onWidthHeight({ width: 1920, height: 1080 })}
+              onClick={() =>
+                onSettings({ ...settings, width: 1920, height: 1080 })
+              }
               className={btnClass}
             >
               16:9
             </button>
             <button
-              onClick={() => onWidthHeight({ width: 1920, height: 1440 })}
+              onClick={() =>
+                onSettings({ ...settings, width: 1920, height: 1440 })
+              }
               className={btnClass}
             >
               4:3
             </button>
             <button
-              onClick={() => onWidthHeight({ width: 1920, height: 1280 })}
+              onClick={() =>
+                onSettings({ ...settings, width: 1920, height: 1280 })
+              }
               className={btnClass}
             >
               3:2

@@ -7,14 +7,11 @@ export default function GenerationTools() {
   const seed = crypto.randomUUID();
 
   const [inputPrompt, setInputPrompt] = useState("");
-  const [widthHeight, setWidthHeight] = useState({
+
+  const [settings, setSettings] = useState({
     width: 1024,
     height: 1024,
-  });
-  const [settings, setSettings] = useState({
-    width: widthHeight.width,
-    height: widthHeight.height,
-    model: "",
+    model: "gptimage",
     seed,
   });
 
@@ -22,6 +19,7 @@ export default function GenerationTools() {
   const handleImageGeneration = () => {
     fetchImage(inputPrompt, settings);
   };
+
   return (
     <>
       <InputBox
@@ -29,10 +27,8 @@ export default function GenerationTools() {
         onInputPrompt={setInputPrompt}
       ></InputBox>
       <AdditionalSettings
-        onWidthHeight={setWidthHeight}
         settings={settings}
         onSettings={setSettings}
-        widthHeight={widthHeight}
       ></AdditionalSettings>
     </>
   );

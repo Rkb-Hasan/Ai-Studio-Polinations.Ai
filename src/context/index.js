@@ -1,4 +1,5 @@
 import { createContext } from "react";
 
 const GenerationContext = createContext("");
-export { GenerationContext };
+const DownloadContext = createContext("");
+export { DownloadContext, GenerationContext };

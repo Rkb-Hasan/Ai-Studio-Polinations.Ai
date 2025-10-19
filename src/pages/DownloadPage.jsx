@@ -1,12 +1,22 @@
+import { useContext } from "react";
 import ImageCard from "../components/ImageCard";
 import WelcomeMessage from "../components/WelcomeMessage";
+import { DownloadContext } from "../context";
 
 export default function DownloadPage() {
+  const { downloads } = useContext(DownloadContext);
+
   return (
     <>
       <WelcomeMessage message="Downloaded"></WelcomeMessage>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        <ImageCard></ImageCard>
+        {downloads.length > 0 ? (
+          downloads.map((item) => (
+            <ImageCard key={item.downloadId} imgUrl={item.url}></ImageCard>
+          ))
+        ) : (
+          <p>No Downloads yet</p>
+        )}
       </div>
     </>
   );

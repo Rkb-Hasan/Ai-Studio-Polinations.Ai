@@ -1,2 +1,3 @@
+import DownloadProvider from "./DownloadProvider";
 import GenerationProvider from "./GenerationProvider";
-export { GenerationProvider };
+export { DownloadProvider, GenerationProvider };
