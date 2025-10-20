@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useModels = () => {
-  const [loading, setLoading] = useState({
+  const [modelLoading, setModelLoading] = useState({
     state: true,
     message: "",
   });
@@ -9,7 +9,7 @@ const useModels = () => {
   const [models, setModels] = useState("");
   const fetchModel = async () => {
     try {
-      setLoading({
+      setModelLoading({
         state: true,
         message: "Fetching models...",
       });
@@ -21,25 +21,36 @@ const useModels = () => {
         throw new Error(errorMessage);
       }
       const data = await response.json();
-      setModels(data);
+      return data;
     } catch (error) {
       setError(error);
     } finally {
-      setLoading({
-        ...loading,
+      setModelLoading({
         state: false,
         message: "",
       });
     }
   };
   useEffect(() => {
-    fetchModel();
+    let ignore = false;
+    const fetchData = async () => {
+      const models = await fetchModel();
+      if (!ignore) {
+        console.log("setting");
+        setModels(models);
+      }
+    };
+    fetchData();
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   return {
     models,
     error,
-    loading,
+    modelLoading,
   };
 };
 

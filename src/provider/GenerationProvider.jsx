@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { GenerationContext } from "../context";
+import useModels from "../hooks/useModels";
 
 export default function GenerationProvider({ children }) {
   const [results, setResults] = useState([]);
@@ -15,7 +16,7 @@ export default function GenerationProvider({ children }) {
 
     try {
       const newItem = {
-        imgId: newId,
+        imgId: crypto.randomUUID(),
         loading: true,
         loadingMessage: "Fetching the image...",
         imgUrl: null,
@@ -56,9 +57,12 @@ export default function GenerationProvider({ children }) {
       );
     }
   };
-
+  // generate the models and pass
+  const { modelLoading, models } = useModels();
   return (
-    <GenerationContext.Provider value={{ fetchImage, results }}>
+    <GenerationContext.Provider
+      value={{ fetchImage, results, modelLoading, models }}
+    >
       {children}
     </GenerationContext.Provider>
   );

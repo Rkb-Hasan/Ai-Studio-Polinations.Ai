@@ -1,4 +1,5 @@
-import useModels from "../../hooks/useModels";
+import React, { useContext } from "react";
+import { GenerationContext } from "../../context";
 import ModelOption from "./ModelOption";
 
 const labelClass = "block text-sm font-medium text-zinc-700 mb-1";
@@ -7,8 +8,8 @@ const inputClass =
 const btnClass =
   "bg-zinc-900/10  px-3 py-3 text-xs  hover:bg-zinc-800 rounded transition-colors";
 
-export default function AdditionalSettings({ onSettings, settings }) {
-  const { loading, models } = useModels();
+function AdditionalSettings({ onSettings, settings }) {
+  const { modelLoading, models } = useContext(GenerationContext);
 
   return (
     <div className="border border-zinc-700/70 mb-6 rounded-lg p-4">
@@ -21,8 +22,8 @@ export default function AdditionalSettings({ onSettings, settings }) {
           <label htmlFor="model" className={labelClass}>
             Model
           </label>
-          {loading.state ? (
-            <p>{loading.message}</p>
+          {modelLoading.state ? (
+            <p>{modelLoading.message}</p>
           ) : (
             <select
               onChange={(e) =>
@@ -122,3 +123,4 @@ export default function AdditionalSettings({ onSettings, settings }) {
     </div>
   );
 }
+export default React.memo(AdditionalSettings);
