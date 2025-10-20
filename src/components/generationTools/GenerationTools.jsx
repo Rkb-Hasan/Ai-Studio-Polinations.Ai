@@ -16,14 +16,17 @@ export default function GenerationTools() {
   });
 
   const { fetchImage } = useContext(GenerationContext);
-  const handleImageGeneration = () => {
+  const handleImageGeneration = (e) => {
+    e.preventDefault();
     fetchImage(inputPrompt, settings);
+    setInputPrompt("");
   };
 
   return (
     <>
       <InputBox
         onGeneration={handleImageGeneration}
+        inputPrompt={inputPrompt}
         onInputPrompt={setInputPrompt}
       ></InputBox>
       <AdditionalSettings

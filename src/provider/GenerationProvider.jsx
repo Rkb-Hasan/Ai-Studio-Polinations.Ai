@@ -3,23 +3,28 @@ import { useState } from "react";
 import { GenerationContext } from "../context";
 
 export default function GenerationProvider({ children }) {
-  const [imgUrl, setImgUrl] = useState(null);
-  const [imageLoading, setImageLoading] = useState({
-    state: false,
-    message: "",
-  });
-  const [imageError, setImageError] = useState(null);
+  const [results, setResults] = useState([]);
 
+  const newId = crypto.randomUUID();
   const fetchImage = async (prompt, options) => {
+    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(
+      prompt
+    )}?width=${options.width}&height=${options.height}&seed=${
+      options.seed
+    }&model=${options.model}`;
+
     try {
-      setImageLoading({ state: true, message: "Fetching the image..." });
-      const response = await fetch(
-        `https://image.pollinations.ai/prompt/${encodeURIComponent(
-          prompt
-        )}?width=${options.width}&height=${options.height}&seed=${
-          options.seed
-        }&model=${options.model}`
-      );
+      const newItem = {
+        imgId: newId,
+        loading: true,
+        loadingMessage: "Fetching the image...",
+        imgUrl: null,
+        imageError: "",
+      };
+
+      // to show the updated nine values
+      setResults((prev) => [...prev.slice(-8), newItem]);
+      const response = await fetch(url, { signal: AbortSignal.timeout(50000) });
 
       if (!response.ok) {
         const errorMessage = `Generating Image Failed ${response.status}`;
@@ -27,18 +32,33 @@ export default function GenerationProvider({ children }) {
       }
 
       const imageBlob = await response.blob();
-      setImgUrl(URL.createObjectURL(imageBlob));
+      const responseUrl = URL.createObjectURL(imageBlob);
+
+      setResults((prev) =>
+        prev.map((item) =>
+          item.imgId === newId ? { ...item, imgUrl: responseUrl } : item
+        )
+      );
     } catch (err) {
-      setImageError(err);
+      // also throws error for Abortsignal.timeout(); errorname is Timeouterror
+      setResults((prev) =>
+        prev.map((item) =>
+          item.imgId === newId ? { ...item, imageError: err.message } : item
+        )
+      );
     } finally {
-      setImageLoading({ state: false, message: "" });
+      setResults((prev) =>
+        prev.map((item) =>
+          item.imgId === newId
+            ? { ...item, loading: false, loadingMessage: "" }
+            : item
+        )
+      );
     }
   };
 
   return (
-    <GenerationContext.Provider
-      value={{ fetchImage, imgUrl, imageError, imageLoading }}
-    >
+    <GenerationContext.Provider value={{ fetchImage, results }}>
       {children}
     </GenerationContext.Provider>
   );

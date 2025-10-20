@@ -10,9 +10,7 @@ const btnClass =
 export default function AdditionalSettings({ onSettings, settings }) {
   const { loading, models } = useModels();
 
-  return loading.state ? (
-    <p>{loading.message}</p>
-  ) : (
+  return (
     <div className="border border-zinc-700/70 mb-6 rounded-lg p-4">
       <div className="flex items-center justify-between mb-4">
         <h4 className="font-medium">Advanced Settings</h4>
@@ -23,18 +21,26 @@ export default function AdditionalSettings({ onSettings, settings }) {
           <label htmlFor="model" className={labelClass}>
             Model
           </label>
-          <select
-            onChange={(e) => onSettings({ ...settings, model: e.target.value })}
-            className="w-full px-3 py-2 bg-zinc-900/10 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-          >
-            {models.length > 0 ? (
-              models.map((item) => (
-                <ModelOption key={item} value={item}></ModelOption>
-              ))
-            ) : (
-              <ModelOption value="No Models Found">No Models Found</ModelOption>
-            )}
-          </select>
+          {loading.state ? (
+            <p>{loading.message}</p>
+          ) : (
+            <select
+              onChange={(e) =>
+                onSettings({ ...settings, model: e.target.value })
+              }
+              className="w-full px-3 py-2 bg-zinc-900/10 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+            >
+              {models.length > 0 ? (
+                models.map((item) => (
+                  <ModelOption key={item} value={item}></ModelOption>
+                ))
+              ) : (
+                <ModelOption value="No Models Found">
+                  No Models Found
+                </ModelOption>
+              )}
+            </select>
+          )}
         </div>
 
         <div>
