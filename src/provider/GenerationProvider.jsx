@@ -16,7 +16,7 @@ export default function GenerationProvider({ children }) {
 
     try {
       const newItem = {
-        imgId: crypto.randomUUID(),
+        imgId: newId,
         loading: true,
         loadingMessage: "Fetching the image...",
         imgUrl: null,
