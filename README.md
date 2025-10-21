@@ -9,10 +9,10 @@
 
 **AI Studio** is a web app that turns your **text prompts into stunning images** using the **Pollinations AI API**.
 
-- 🧠 Generates AI images from natural text prompts
-- ⚙️ Offers adjustable settings — model, width, height, and aspect ratio
-- 🎨 Built with **React.js** and **Tailwind CSS**
-- 🚀 Deployed on **Vercel** for fast global performance
+- Generates AI images from natural text prompts
+- Offers adjustable settings — model, width, height, and aspect ratio
+- Built with **React.js** and **Tailwind CSS**
+- Deployed on **Vercel** for fast global performance
 
 ---
 
