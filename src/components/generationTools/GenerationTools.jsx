@@ -9,7 +9,7 @@ export default function GenerationTools() {
   const [settings, setSettings] = useState({
     width: 1024,
     height: 1024,
-    model: "gptimage",
+    model: "flux",
     seed,
   });
 

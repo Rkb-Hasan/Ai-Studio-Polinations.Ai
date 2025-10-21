@@ -14,7 +14,9 @@ const useModels = () => {
         message: "Fetching models...",
       });
 
-      const response = await fetch(`https://image.pollinations.ai/models`);
+      const response = await fetch(`https://image.pollinations.ai/models`, {
+        signal: AbortSignal.timeout(20000),
+      });
 
       if (!response.ok) {
         const errorMessage = `Fetching models Failed ${response.status}`;
