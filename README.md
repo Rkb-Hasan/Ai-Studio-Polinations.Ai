@@ -1,24 +1,28 @@
 # AI Studio — Text to Image Generator
 
-**Live Demo:** [https://ai-studio-polinations-ai.vercel.app](https://ai-studio-polinations-ai.vercel.app)
+**Live Demo:** [https://ai-studio-polinations-ai.vercel.app](https://ai-studio-polinations-ai.vercel.app)  
+**API Docs:** [Pollinations AI API Documentation](https://github.com/pollinations/pollinations/blob/master/APIDOCS.md)
 
-AI Studio is a **text-to-image generation web app** powered by the **Pollinations AI API**.  
-Simply write a text prompt and watch it turn into a stunning image!  
-You can also fine-tune your output by adjusting model settings such as **width, height, aspect ratio**, and **AI model** type.
+---
+
+## Overview
+
+**AI Studio** is a web app that turns your **text prompts into stunning images** using the **Pollinations AI API**.
+
+- 🧠 Generates AI images from natural text prompts
+- ⚙️ Offers adjustable settings — model, width, height, and aspect ratio
+- 🎨 Built with **React.js** and **Tailwind CSS**
+- 🚀 Deployed on **Vercel** for fast global performance
 
 ---
 
 ## Features
 
-- **AI-Powered Image Generation** — Converts your text prompt into realistic or artistic images using the Pollinations AI API.
-- **Advanced Settings** — Customize image parameters like:
-- Model selection
-- Width & height
-- Aspect ratio
-- Random seed for unique outputs
-- **Download Support** — Save generated images easily.
-- **Modern UI** — Clean and responsive interface built with **Tailwind CSS**.
-- **Fast & Lightweight** — Built with **React.js**, optimized for performance.
+- **AI-Powered Image Generation** — Transform your imagination into visuals.
+- **Custom Settings Panel** — Fine-tune model, dimensions, and aspect ratio.
+- **Download Support** — Save generated images instantly.
+- **Dynamic State Management** — Real-time rendering and status updates.
+- **Modern UI** — Sleek dark-themed design with Tailwind CSS.
 
 ---
 
